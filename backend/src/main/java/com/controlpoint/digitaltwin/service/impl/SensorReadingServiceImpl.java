@@ -19,12 +19,10 @@ public class SensorReadingServiceImpl implements SensorReadingService {
 
     @Override
     public SensorReadingResponseDto getLatestReadingForAsset(Long assetId) {
-        // First verify the asset exists
         if (!assetRepository.existsById(assetId)) {
             throw new ResourceNotFoundException("Asset not found with id: " + assetId);
         }
 
-        // Fetch the latest reading and map it to a DTO
         return sensorReadingRepository.findTopByAssetIdOrderByTimestampDesc(assetId)
                 .map(sensorReadingMapper::toResponseDto)
                 .orElse(null);

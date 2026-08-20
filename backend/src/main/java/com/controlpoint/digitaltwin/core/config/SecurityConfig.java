@@ -21,10 +21,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        // 1. Disable CSRF since this is a stateless REST API
         http.csrf(AbstractHttpConfigurer::disable);
 
-        // 2. Apply CORS configuration
         http.cors(
                 cors ->
                         cors.configurationSource(
@@ -37,11 +35,9 @@ public class SecurityConfig {
                                     return config;
                                 }));
 
-        // 3. Make the session stateless (no HTTP sessions are created)
         http.sessionManagement(
                 session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        // 4. Allow all requests without authentication
         http.authorizeHttpRequests(
                 auth -> auth.anyRequest().permitAll());
 
