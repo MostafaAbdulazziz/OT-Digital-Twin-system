@@ -25,6 +25,6 @@ public class SensorReadingServiceImpl implements SensorReadingService {
 
         return sensorReadingRepository.findTopByAssetIdOrderByTimestampDesc(assetId)
                 .map(sensorReadingMapper::toResponseDto)
-                .orElse(null);
+                .orElseThrow(() -> new ResourceNotFoundException("No sensor readings found for asset id: " + assetId));
     }
 }
