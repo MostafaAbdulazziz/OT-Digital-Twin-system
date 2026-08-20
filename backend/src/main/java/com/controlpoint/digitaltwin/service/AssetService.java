@@ -1,10 +1,13 @@
 package com.controlpoint.digitaltwin.service;
 
-import com.controlpoint.digitaltwin.repository.AssetRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.controlpoint.digitaltwin.dto.AssetRequestDto;
+import com.controlpoint.digitaltwin.dto.AssetResponseDto;
+import com.controlpoint.digitaltwin.dto.SensorReadingResponseDto;
 
-@Service
+import java.util.List;
+
 public interface AssetService {
-    void CreatAsset(AssetDto assetDto);
+    List<AssetResponseDto> getAllAssets();
+    AssetResponseDto getAssetById(Long id);
+    AssetResponseDto createAsset(AssetRequestDto request);
 }
